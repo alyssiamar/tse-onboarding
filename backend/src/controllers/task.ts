@@ -81,3 +81,12 @@ export const removeTask: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllTasks: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Query.prototype.sort(dateCreated);
+  } catch (error) {
+    next(error);
+  }
+};
