@@ -2,6 +2,7 @@ import { json } from "react-router-dom";
 import { get, handleAPIError, post } from "src/api/requests";
 
 import type { APIResult } from "src/api/requests";
+import { TaskList } from "src/components";
 
 /**
  * Defines the "shape" of a Task object (what fields are present and their types) for
@@ -101,6 +102,32 @@ export async function getAllTasks(): Promise<APIResult<Task[]>> {
     const response = await get("/api/tasks");
     const json = (await response.json()) as TaskJSON[];
     return { success: true, data: json.map(parseTask) };
+  } catch (error) {
+    return handleAPIError(error);
+  }
+}
+
+export async function updateTask(task: UpdateTaskRequest): Promise<APIResult<Task>> {
+  try {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+    const response = await fetch(`${API_BASE_URL}/api/task/${task._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Failed to update task: ${response.status} ${response.statusText}. ${errorText}`,
+      );
+    }
+
+    const json = (await response.json()) as TaskJSON;
+    return { success: true, data: parseTask(json) };
   } catch (error) {
     return handleAPIError(error);
   }
