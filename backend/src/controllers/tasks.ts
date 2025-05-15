@@ -3,8 +3,6 @@ import task from "src/models/task";
 import TaskModel from "src/models/task";
 
 export const getAllTasks: RequestHandler = async (req, res, next) => {
-  const { id } = req.params;
-
   try {
     const task = await TaskModel.find();
     await task.sort(Date.now);
