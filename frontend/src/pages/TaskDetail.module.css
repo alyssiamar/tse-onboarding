@@ -1,0 +1,95 @@
+.item {
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  column-gap: 0.25rem;
+  width: 100%;
+}
+
+.Unknowntitle {
+  margin-top: 28px;
+  font: Rubik;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.backLink {
+  font: Rubik;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+.editButton {
+  width: 95px;
+  height: 35px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font: Rubik;
+  background-color: rgba(222, 187, 1, 1);
+  color: rgba(12, 43, 53, 1);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.title {
+  font: Rubik;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0.1px;
+}
+
+.description {
+  font: Rubik;
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detailRow {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.label {
+  font: Rubik;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.value {
+  font: Rubik;
+  font-weight: 400;
+  font-size: 16px;
+}
