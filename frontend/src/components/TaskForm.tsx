@@ -53,7 +53,7 @@ export function TaskForm({ mode, task, onSubmit }: TaskFormProps) {
       return;
     }
     setLoading(true);
-    if (mode == "create") {
+    if (mode === "create") {
       createTask({ title, description, assignee: assignee?._id })
         .then((result) => {
           if (result.success) {

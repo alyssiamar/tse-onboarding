@@ -1,5 +1,4 @@
 import { InferSchemaType, Schema, model } from "mongoose";
-import { getUser } from "src/controllers/user";
 
 const taskSchema = new Schema({
   title: { type: String, required: true },

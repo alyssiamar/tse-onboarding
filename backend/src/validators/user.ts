@@ -28,4 +28,8 @@ const makeProfilePictureURLValidator = () =>
     .isString()
     .withMessage("profile picture URL must be a string");
 
-export const createUser = [makeNameValidator(), makeProfilePictureURLValidator()];
+export const createUser = [
+  makeIDValidator(),
+  makeNameValidator(),
+  makeProfilePictureURLValidator(),
+];

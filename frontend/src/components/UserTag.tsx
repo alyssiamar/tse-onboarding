@@ -1,5 +1,5 @@
-import styles from "src/components/UserTag.module.css";
 import { User } from "src/api/users.ts";
+import styles from "src/components/UserTag.module.css";
 
 export const UserTag = ({ user }: { user: User }) => {
   return (

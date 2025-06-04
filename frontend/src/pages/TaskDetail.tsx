@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { Task, getTask } from "src/api/tasks";
-import { HeaderBar, Page } from "src/components";
-import { UserTag } from "src/components";
-import { TaskForm } from "src/components";
+import { HeaderBar, Page, UserTag, TaskForm } from "src/components";
 import styles from "src/pages/TaskDetail.module.css";
 
 export function TaskDetail() {
@@ -54,7 +52,7 @@ export function TaskDetail() {
         <p>
           <Link to="/">Back to Home</Link>
         </p>
-        <div className={styles.Unknowntitle}>This task doesn't exist!</div>
+        <div className={styles.Unknowntitle}>This task doesn&apos;t exist!</div>
       </Page>
     );
   }
@@ -74,10 +72,8 @@ export function TaskDetail() {
         </div>
 
         {isEditing ? (
-          // Show TaskForm when editing
           <TaskForm mode="edit" task={task} onSubmit={handleFormSubmit} />
         ) : (
-          // Show task details when not editing
           <>
             <div className={styles.titleRow}>
               <h1 className={styles.title}>{task.title}</h1>

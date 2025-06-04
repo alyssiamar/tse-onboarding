@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { updateTask, type Task } from "src/api/tasks";
+import type { Task } from "src/api/tasks";
+import { updateTask } from "src/api/tasks";
 import { CheckButton } from "src/components";
 import styles from "src/components/TaskItem.module.css";
 import { UserTag } from "src/components/UserTag";
