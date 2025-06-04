@@ -45,6 +45,7 @@ const mockTask: Task = {
   _id: "task123",
   title: "My task",
   description: "Very important",
+  assignee: undefined,
   isChecked: false,
   dateCreated: new Date(),
 };
@@ -136,8 +137,12 @@ describe("TaskForm", () => {
     fireEvent.click(saveButton);
     expect(updateTask).toHaveBeenCalledTimes(1);
     expect(updateTask).toHaveBeenCalledWith({
+      _id: "task123",
       title: "Updated title",
       description: "Updated description",
+      assignee: undefined,
+      isChecked: false,
+      dateCreated: mockTask.dateCreated,
     });
     await waitFor(() => {
       // If the test ends before all state updates and rerenders occur, we'll
