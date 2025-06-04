@@ -17,6 +17,12 @@
   align-items: flex-end;
 }
 
+.topRow {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+
 .textField {
   width: 50%;
   max-width: 16rem;
@@ -26,4 +32,10 @@
   width: 50%;
   max-width: none;
   flex-grow: 1;
+}
+
+.bottomRow {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
 }

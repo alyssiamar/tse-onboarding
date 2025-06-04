@@ -4,7 +4,7 @@ import TaskModel from "src/models/task";
 
 export const getAllTasks: RequestHandler = async (req, res, next) => {
   try {
-    const task = await TaskModel.find();
+    const task = await TaskModel.find().populate("assignee");
     await task.sort(Date.now);
     res.status(200).json(task);
   } catch (error) {

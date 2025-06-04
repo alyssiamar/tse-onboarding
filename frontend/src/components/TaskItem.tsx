@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { updateTask, type Task } from "src/api/tasks";
+import { Link } from "react-router-dom";
+import type { Task } from "src/api/tasks";
+import { updateTask } from "src/api/tasks";
 import { CheckButton } from "src/components";
 import styles from "src/components/TaskItem.module.css";
+import { UserTag } from "src/components/UserTag";
 
 export interface TaskItemProps {
   task: Task;
@@ -17,10 +20,11 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
     updateTask({
       ...task,
       isChecked: !task.isChecked,
+      assignee: task.assignee?._id,
     })
       .then((result) => {
         if (result.success) {
-          setTask(result.data); // Assuming result.data is the updated task
+          setTask(result.data);
         } else {
           alert(result.error); // If result has an error, alert the user
         }
@@ -41,8 +45,17 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
       <div className={styles.item}>
         <CheckButton checked={task.isChecked} disabled={isLoading} onPress={handleToggleCheck} />
         <div className={textContainerClass}>
-          <span className={styles.title}>{task.title || "Task Item Title"}</span>
+          <Link to={`/task/${task._id}`} className={styles.title}>
+            {task.title || "Task Item Title"}
+          </Link>
           {task.description && <span className={styles.description}>{task.description}</span>}
+        </div>
+        <div className={styles.userTagContainer}>
+          {task.assignee ? (
+            <UserTag user={task.assignee} />
+          ) : (
+            <span className={styles.notAssigned}>Not assigned</span>
+          )}
         </div>
       </div>
     </div>
