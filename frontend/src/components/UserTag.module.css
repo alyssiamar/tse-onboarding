@@ -1,0 +1,19 @@
+.userTag {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between profile picture and name */
+}
+
+.profilePicture {
+  border-radius: 50%; /* Makes the image circular */
+  width: 32px; /* Adjust size as needed */
+  height: 32px;
+  object-fit: cover; /* Ensures image fits nicely in circle */
+}
+
+.userName {
+  font: Rubik;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-primary);
+}

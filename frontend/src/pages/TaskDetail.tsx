@@ -3,10 +3,13 @@ import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { Task, getTask } from "src/api/tasks";
 import { HeaderBar, Page } from "src/components";
+import { UserTag } from "src/components";
+import { TaskForm } from "src/components";
 import styles from "src/pages/TaskDetail.module.css";
 
 export function TaskDetail() {
   const [task, setTask] = useState<Task | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -32,6 +35,15 @@ export function TaskDetail() {
 
     fetchTask();
   }, [id]);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleFormSubmit = (updatedTask: Task) => {
+    setTask(updatedTask);
+    setIsEditing(false);
+  };
 
   if (!task) {
     return (
@@ -60,43 +72,52 @@ export function TaskDetail() {
             Back to home
           </Link>
         </div>
-        <div className={styles.titleRow}>
-          <h1 className={styles.title}>{task.title}</h1>
-          <Link to={`/task/${task._id}/edit`} className={styles.editButton}>
-            Edit task
-          </Link>
-        </div>
 
-        <p className={styles.description}>{task.description || "(No description)"}</p>
+        {isEditing ? (
+          // Show TaskForm when editing
+          <TaskForm mode="edit" task={task} onSubmit={handleFormSubmit} />
+        ) : (
+          // Show task details when not editing
+          <>
+            <div className={styles.titleRow}>
+              <h1 className={styles.title}>{task.title}</h1>
+              <button onClick={handleEditClick} className={styles.editButton}>
+                Edit task
+              </button>
+            </div>
 
-        <div className={styles.details}>
-          <div className={styles.detailRow}>
-            <span className={styles.label}>Assignee</span>
-            <span className={styles.value}>
-              {task.assignee ? task.assignee.name || "Unknown user" : "Not assigned"}
-            </span>
-          </div>
+            <p className={styles.description}>{task.description || "(No description)"}</p>
 
-          <div className={styles.detailRow}>
-            <span className={styles.label}>Status</span>
-            <span className={styles.value}>{task.isChecked ? "Done" : "Not done"}</span>
-          </div>
+            <div className={styles.details}>
+              <div className={styles.detailRow}>
+                <span className={styles.label}>Assignee</span>
+                <span className={styles.value}>
+                  {task.assignee ? <UserTag user={task.assignee} /> : "Not assigned"}
+                </span>
+              </div>
 
-          <div className={styles.detailRow}>
-            <span className={styles.label}>Date created</span>
-            <span className={styles.value}>
-              {new Date(task.dateCreated).toLocaleDateString("en-US", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true,
-              })}
-            </span>
-          </div>
-        </div>
+              <div className={styles.detailRow}>
+                <span className={styles.label}>Status</span>
+                <span className={styles.value}>{task.isChecked ? "Done" : "Not done"}</span>
+              </div>
+
+              <div className={styles.detailRow}>
+                <span className={styles.label}>Date created</span>
+                <span className={styles.value}>
+                  {new Date(task.dateCreated).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

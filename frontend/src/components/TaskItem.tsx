@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { updateTask, type Task } from "src/api/tasks";
 import { CheckButton } from "src/components";
 import styles from "src/components/TaskItem.module.css";
+import { UserTag } from "src/components/UserTag";
 
 export interface TaskItemProps {
   task: Task;
@@ -22,7 +23,7 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
     })
       .then((result) => {
         if (result.success) {
-          setTask(result.data); // Assuming result.data is the updated task
+          setTask(result.data);
         } else {
           alert(result.error); // If result has an error, alert the user
         }
@@ -47,6 +48,13 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
             {task.title || "Task Item Title"}
           </Link>
           {task.description && <span className={styles.description}>{task.description}</span>}
+        </div>
+        <div className={styles.userTagContainer}>
+          {task.assignee ? (
+            <UserTag user={task.assignee} />
+          ) : (
+            <span className={styles.notAssigned}>Not assigned</span>
+          )}
         </div>
       </div>
     </div>

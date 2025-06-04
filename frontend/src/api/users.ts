@@ -2,11 +2,6 @@ import { get, handleAPIError, post } from "src/api/requests";
 
 import type { APIResult } from "src/api/requests";
 
-/**
- * Defines the "shape" of a User object (what fields are present and their types) for
- * frontend components to use. This will be the return type of most functions in this
- * file.
- */
 export interface User {
   _id: string;
   name: string;
@@ -15,7 +10,7 @@ export interface User {
 
 export interface CreateUserRequest {
   name: string;
-  profilePicutreURL?: string;
+  profilePictureURL?: string;
 }
 
 export interface UserJSON {
@@ -24,7 +19,7 @@ export interface UserJSON {
   profilePictureURL?: string;
 }
 
-export function parseTask(user: UserJSON): User {
+export function parseUser(user: UserJSON): User {
   return {
     _id: user._id,
     name: user.name,
@@ -32,21 +27,21 @@ export function parseTask(user: UserJSON): User {
   };
 }
 
-export async function createTask(user: CreateUserRequest): Promise<APIResult<User>> {
+export async function createUser(user: CreateUserRequest): Promise<APIResult<User>> {
   try {
     const response = await post("/api/user", user);
     const json = (await response.json()) as UserJSON;
-    return { success: true, data: parseTask(json) };
+    return { success: true, data: parseUser(json) };
   } catch (error) {
     return handleAPIError(error);
   }
 }
 
-export async function getTask(id: string): Promise<APIResult<User>> {
+export async function getUser(id: string): Promise<APIResult<User>> {
   try {
-    const response = await get(`/api/task/${id}`);
+    const response = await get(`/api/user/${id}`);
     const json = (await response.json()) as UserJSON;
-    return { success: true, data: parseTask(json) };
+    return { success: true, data: parseUser(json) };
   } catch (error) {
     return handleAPIError(error);
   }

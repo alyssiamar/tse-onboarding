@@ -2,14 +2,15 @@
   height: 3rem;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   column-gap: 0.25rem;
+  border-bottom: 1px solid var(--color-text-secondary);
+  gap: 12px;
 }
 
 .textContainer {
   height: 100%;
-  border-bottom: 1px solid var(--color-text-secondary);
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -47,4 +48,16 @@
 
 .checked {
   color: var(--color-text-secondary);
+}
+
+.userTagContainer {
+  width: 200px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.notAssigned {
+  font: Rubik;
+  font-weight: 400;
+  font-size: 16px;
 }
